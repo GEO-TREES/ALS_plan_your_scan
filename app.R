@@ -3,6 +3,13 @@ library(dplyr)
 library(ggplot2)
 library(ggnewscale)
 
+# Workaround for Google Chrome bug (blob URL downloads from webR/shinylive)
+downloadButton <- function(...) {
+  tag <- shiny::downloadButton(...)
+  tag$attribs$download <- NULL
+  tag
+}
+
 ui <- fluidPage(
   titlePanel("Flightline Overlap Visualization"),
 
