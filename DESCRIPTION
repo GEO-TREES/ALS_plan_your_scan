@@ -1,0 +1,12 @@
+Package: KisanganiOverlapApp
+Type: Application
+Title: Flightline Overlap Visualization
+Version: 1.0.0
+Description: Interactive visualization of ALS flightline overlap at ground
+    level and top-of-canopy, for proposed and target sensor field-of-view
+    settings.
+Imports:
+    shiny,
+    dplyr,
+    ggplot2,
+    ggnewscale
