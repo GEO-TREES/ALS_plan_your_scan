@@ -1,8 +1,13 @@
-# ALS_plan_your_scan
-
 # A simple, interactive app for planning flightline parameters
 
 This tool provides a visual interface for ensuring that flightline geometry parameters meet GEO-TREES data quality standards.
+
+The user sets the following parameters to determine the flightline geometry:
+- **Flight altitude**: the planned height above the ground of the aircraft.
+- **Overlap**: the proportion of overlap, in projected area on the ground, of two adjacent flightlines. 
+- **Sensor FOV**: the full field-of-view of the lidar sensor. 
+- **Target FOV**: a restricted field-of-view for which to plan 50% flighline overlap.
+- **Maximum Canopy Height**: the height above the ground of the sensor.
 
 The true, realized flightline geometry is expected to vary as a result of:
 - adjustments in roll and pitch of the aircraft during flight,
@@ -11,7 +16,8 @@ The true, realized flightline geometry is expected to vary as a result of:
 
 These standards aim to ensure quality acquisitions, accounting for this expected variability.
 
-**[Launch the app](https://geo-trees.github.io/ALS_plan_your_scan/)**
+**[Launch the app!](https://geo-trees.github.io/ALS_plan_your_scan/)**
+
 The app may be slow to load on the first launch. Please wait a few minutes. 
 
 ## Why top-of-canopy overlap matters
