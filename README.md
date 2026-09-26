@@ -9,6 +9,20 @@ The user sets the following parameters to determine the flightline geometry:
 - **Target FOV**: a restricted field-of-view for which to plan 50% flighline overlap.
 - **Maximum Canopy Height**: the height above the ground of the sensor.
 
+**[Launch the app!](https://geo-trees.github.io/ALS_plan_your_scan/)**
+
+The app may be slow to load on the first launch. Please wait a few minutes. 
+
+# GEO-TREES flightline geometry standards
+
+The app allows users to check if parameters meet the following, specific GEO-TREES standards: 
+- [ ] ≥ 50% flightline overlap, ensuring that all areas be theoretically sampled by
+
+| Planet | Diameter (km) | Type |
+| :--- | :---: | ---: |
+| Mercury | 4,879 | Terrestrial |
+| Jupiter | 139,820 | Gas Giant |
+
 The true, realized flightline geometry is expected to vary as a result of:
 - adjustments in roll and pitch of the aircraft during flight,
 - deviations between the planned and true flight path,
@@ -16,11 +30,8 @@ The true, realized flightline geometry is expected to vary as a result of:
 
 These standards aim to ensure quality acquisitions, accounting for this expected variability.
 
-**[Launch the app!](https://geo-trees.github.io/ALS_plan_your_scan/)**
 
-The app may be slow to load on the first launch. Please wait a few minutes. 
-
-## Why top-of-canopy overlap matters
+## Problem scenarios
 
 Flight plans are usually specified as a percentage of ground overlap
 between adjacent flightlines. But a sensor's field of view narrows as it
