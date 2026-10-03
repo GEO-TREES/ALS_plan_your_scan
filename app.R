@@ -10,26 +10,33 @@ downloadButton <- function(...) {
   tag
 }
 
-# Scenario choices and the Target FOV (deg) each one sets
+# Scenario choices and the Target FOV (deg) that each one sets
 scenario_fov <- c("Savanna and scrubland"                = 60,
                   "Closed-canopy forest"                 = 60,
                   "Tall canopies / complex topography"   = 40,
                   "Flooded forests / extreme topography" = 30)
+
+# Scenario choices and the max canopy height that each one sets
+scenario_height <- c("Savanna and scrubland"             = 25,
+                     "Closed-canopy forest"                 = 35,
+                     "Tall canopies / complex topography"   = 50,
+                     "Flooded forests / extreme topography" = 50)
 
 ui <- fluidPage(
   titlePanel("GEO-TREES ALS flightline visualization"),
   
   sidebarLayout(
     sidebarPanel(
-      selectInput("scenario", "Scenario", choices = names(scenario_fov)),
       textInput("name", "Site name:", "Site name"),
       textInput("sensor", "Sensor:", "Sensor"),
+      sliderInput("FOV", "Sensor FOV (deg):", min = 0, max = 180, value = 50, step = 1),
       numericInput("alt", "Altitude (m):", 700),
-      sliderInput("overlap", "Overlap (%):", min = 0, max = 1, value = .5, step = .05),
-      sliderInput("FOV", "Sensor FOV (deg):", min = 0, max = 180, value = 40, step = 1),
+      sliderInput("overlap", "Overlap (%):", min = 0, max = 100, value = 50, step = 5),
+      selectInput("scenario", "Scenario", choices = names(scenario_fov)),
       sliderInput("FOV_target", "Target FOV (deg):", min = 0, max = 180,
-                  value = unname(scenario_fov[1]), step = 1),
-      numericInput("canopy_max", "Maximum canopy height (m):", 40),
+                  value = unname(scenario_fov[1]), step = 5),
+      numericInput("canopy_max", "Maximum canopy height (m):", 
+                   value = unname(scenario_height[1])),
       downloadButton("downloadPlot", "Download plot")
       
     ),
@@ -42,13 +49,17 @@ ui <- fluidPage(
 
 server <- function(input, output, session) {
   
-  # Set the Target FOV whenever a scenario is selected
+  # Set the Target FOV and the maximum canopy height whenever a scenario is selected
   observeEvent(input$scenario, {
     updateSliderInput(session, "FOV_target", value = unname(scenario_fov[input$scenario]))
+    updateNumericInput(session, "canopy_max", value = unname(scenario_height[input$scenario]))
   })
   
   # Reactive calculations to update when inputs change
   plot_data <- reactive({
+    
+    # Overlap slider is in percent (0-100); the calculations below use a 0-1 fraction
+    overlap_prop <- input$overlap / 100
     
     # Angles
     angle_rad <- (input$FOV / 2) * pi / 180
@@ -62,7 +73,7 @@ server <- function(input, output, session) {
     half_swath_target_canopy <- half_swath_target * SF_canopy
     
     # Plotting Locations
-    overlap_distance <- half_swath * 2 * input$overlap
+    overlap_distance <- half_swath * 2 * overlap_prop
     X_1 <- half_swath
     X_2 <- (half_swath * 3) - overlap_distance
     X_3 <- (half_swath * 5) - (overlap_distance * 2)
@@ -119,7 +130,7 @@ server <- function(input, output, session) {
       y_annot = span * (1 - margin_frac),      # top of the annotation block (same margin)
       lab_df = data.frame(alt = rep(input$alt, 4),
                           FOV = c(input$FOV, input$FOV, input$FOV_target, input$FOV_target),
-                          overlap_ground = c(input$overlap, input$overlap, overlap_target, overlap_target),
+                          overlap_ground = c(overlap_prop, overlap_prop, overlap_target, overlap_target),
                           overlap_canopy = c(overlap_canopy, overlap_canopy, overlap_target_canopy, overlap_target_canopy),
                           facet = c("proposed", "canopy", "target", "target_canopy"),
                           X_1 = rep(X_1, 4),
