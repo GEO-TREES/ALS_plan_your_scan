@@ -12,15 +12,16 @@ The user sets the following parameters to determine the flightline geometry:
 **[Launch the app!](https://geo-trees.github.io/ALS_plan_your_scan/)**
 
 
-## Using the app
-
 The app may be slow to load on the first launch. Please wait up to a few minutes. 
 
-Adjust the sliders for site altitude, sensor field of view, target field
+1. Enter your site name, flight altitude, sensor name, and sensor FOV manually. 
+2. Adjust the sliders for site altitude, sensor field of view, target field
 of view, planned ground overlap, and expected maximum canopy height. The
 plot updates immediately and shows four views: the proposed flight
 geometry, the equivalent top-of-canopy overlap, and the same two views at
-an alternate target FOV for comparison. Use the **Download Plot** button
+an alternate target FOV for comparison. 
+
+Use the **Download Plot** button
 to save the current view as a PNG.
 
 
