@@ -3,26 +3,32 @@
 This tool provides a visual interface for ensuring that flightline geometry parameters meet GEO-TREES data quality standards.
 
 The user sets the following parameters to determine the flightline geometry:
-- **Flight altitude**: the planned height above the ground of the aircraft.
-- **Overlap**: the proportion of overlap, in projected area on the ground, of two adjacent flightlines. 
+- **Site name**: the name of the site to be flown.
+- **Sensor**: the name of the lidar sensor to be used.
 - **Sensor FOV**: the full field-of-view of the lidar sensor. 
-- **Target FOV**: a restricted field-of-view for which to plan 50% flighline overlap.
-- **Maximum Canopy Height**: the height above the ground of the sensor.
+- **Flight altitude**: the planned height above the ground of the aircraft.
+- **Overlap**: the proportion of overlap, in projected area on the ground, of two adjacent flightlines in the sensor FOV.
+- **Scenario**: one of four GEO-TREES flight scenarios, for which different overlap parameters are required:
+  - Savanna and scrubland,
+  - Closed-canopy forest,
+  - Tall canopies / complex topography,
+  - Flooded forests / extreme topography.
+- **Target FOV**: a restricted field-of-view for which to plan full flighline coverage.
+- **Maximum Canopy Height**: the maximum height of a tree expected at the site.
 
 **[Launch the app!](https://geo-trees.github.io/ALS_plan_your_scan/)**
 
 
 The app may be slow to load on the first launch. Please wait up to a few minutes. 
 
-1. Enter your site name, flight altitude, sensor name, and sensor FOV manually. 
-2. Adjust the sliders for site altitude, sensor field of view, target field
-of view, planned ground overlap, and expected maximum canopy height. The
-plot updates immediately and shows four views: the proposed flight
-geometry, the equivalent top-of-canopy overlap, and the same two views at
-an alternate target FOV for comparison. 
+1. Enter the **site name**, **flight altitude**, and lidar **sensor name** manually.
+2. Adjust the **sensor FOV** to that of the sensor.
+3. Select a **scenario** from the dropdown menu; values for **target FOV** will populate automatically.
+4. Adjust the **maximum canopy height** for the specific site. 
+5. Adjust the sliders for **overlap**.
+6. Use the **Download Plot** button to save the current view as a PNG.
 
-Use the **Download Plot** button
-to save the current view as a PNG.
+If parameters violate the GEO-TREES standards, text will appear red on the image. 
 
 
 # GEO-TREES flightline geometry standards
